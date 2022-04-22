@@ -1,21 +1,43 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useMemo } from "react";
+
+const expensiveCalculation = num => {
+  for (let i = 0; i < 1000000000; i++) {}
+  return num;
+};
 
 export const Test = () => {
-  const [inputValue, setInputValue] = useState("");
-  const count = useRef(0);
+  const [count, setCount] = useState(0);
+  const [todos, setTodos] = useState([]);
 
-  useEffect(() => {
-    count.current = count.current + 1;
-  });
+  const calculation = useMemo(
+    () => expensiveCalculation(count),
+    [count]
+  );
+
+  const increment = () => {
+    setCount(count + 1);
+  };
+
+  const addTodo = () => {
+    setTodos(t => [...t, "New Todo"]);
+  };
 
   return (
-    <>
-      <input
-        type="text"
-        value={inputValue}
-        onChange={e => setInputValue(e.target.value)}
-      />
-      <h1>Render Count: {count.current}</h1>
-    </>
+    <div>
+      <div>
+        <button onClick={() => addTodo()}>Add ToDo</button>
+        <h1>My Todos</h1>
+        <ul>
+          {todos.map(t => {
+            return <li>{t}</li>;
+          })}
+        </ul>
+      </div>
+      <div>
+        <button onClick={() => increment()}>Increase</button>
+        Count: {count} <br />
+        Expensive count: {calculation}
+      </div>
+    </div>
   );
 };

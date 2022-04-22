@@ -1,11 +1,12 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
-import { Input } from "./components/input/input";
+
+import { Test } from "./components/test/test";
 
 const App = () => {
   return (
     <div>
-      <Input />
+      <Test />
     </div>
   );
 };

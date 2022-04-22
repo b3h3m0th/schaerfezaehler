@@ -1,13 +1,11 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
-
-import * as fromCounter from "./components/counter/counter";
+import { Input } from "./components/input/input";
 
 const App = () => {
   return (
     <div>
-      <div>Döner</div>
-      <fromCounter.Counter />
+      <Input />
     </div>
   );
 };
